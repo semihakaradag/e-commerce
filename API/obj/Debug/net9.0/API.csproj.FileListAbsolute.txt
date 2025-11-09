@@ -144,3 +144,4 @@ C:\Users\semih\OneDrive\Masaüstü\e-commerce\API\obj\Debug\net9.0\refint\API.dl
 C:\Users\semih\OneDrive\Masaüstü\e-commerce\API\obj\Debug\net9.0\API.pdb
 C:\Users\semih\OneDrive\Masaüstü\e-commerce\API\obj\Debug\net9.0\API.genruntimeconfig.cache
 C:\Users\semih\OneDrive\Masaüstü\e-commerce\API\obj\Debug\net9.0\ref\API.dll
+C:\Users\semih\OneDrive\Masaüstü\e-commerce\API\bin\Debug\net9.0\API.staticwebassets.runtime.json

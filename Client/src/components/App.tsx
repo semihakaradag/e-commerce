@@ -1,41 +1,17 @@
-import { useEffect, useState } from "react";
-import { IProduct } from "../model/IProduct";
 import Header from "./Header";
-import ProductList from "./ProductList";
-import  ButtonUsage  from "./ButtonUsage";
+import { Container, CssBaseline } from "@mui/material";
+import { Outlet } from "react-router";
 
-
-
-
-function App() {
-
-   const [products, setProducts] = useState<IProduct[]> ([]);
-  
-
-  useEffect(() => {
-    fetch("http://localhost:5080/api/products")
-   .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-    .then(setProducts)
-    .catch(err => console.error('API error:', err));
-  }, []);
- 
-  function addProduct() {
-    setProducts([...products, 
-      {
-         id:Date.now(), 
-         name: "product 4", 
-         price :4000, 
-         isActive:true
-        }])
-  }
-  
+function App() {  
   return (
     <>
-     <Header products={products}/>
-     <ProductList products={products} addProduct={addProduct}/>
-     <ButtonUsage/>
+      <CssBaseline />
+      <Header />
+      <Container>
+        <Outlet />
+      </Container>
     </>
-    
   )
 }
+
 export default App
