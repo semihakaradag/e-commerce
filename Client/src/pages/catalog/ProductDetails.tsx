@@ -2,26 +2,30 @@ import { CircularProgress, Divider, Grid2, Table, TableBody, TableCell, TableCon
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { IProduct } from "../../model/IProduct";
+import requests from "../../api/requests";
+import NotFound from "../../errors/NotFound";
 
 export default function ProductDetailsPage() {
 
-    const { id } = useParams();
+    const { id } = useParams<{id: string}>();
     const [product, setProduct] = useState<IProduct | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5080/api/products/${id}`)
-            .then(response => response.json())
-            .then(data => setProduct(data))
-            .catch(error => console.log(error))
-            .finally(() => setLoading(false));
-    }, [id]);
+       if (!id) return;            // id yoksa çık
+       setLoading(true);
+
+       requests.Catalog.details(parseInt(id, 10))
+        .then((data) => setProduct(data))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+}, [id]);
 
     if(loading) return <CircularProgress />
 
-    if(!product) return <h5>Product not found...</h5>;
+    if(!product) return <NotFound/>;
 
-    return (
+    return (    
        <Grid2 container spacing={6}>
             <Grid2 size={{xl: 3, lg: 4, md: 5, sm: 6, xs: 12}}>
                 <img src={`http://localhost:5080/images/${product.imageUrl}`} style={{width: "100%"}}/>
